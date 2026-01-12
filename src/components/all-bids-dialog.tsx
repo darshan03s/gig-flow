@@ -64,8 +64,8 @@ const AllBidsDialog = ({
             <span className="line-clamp-1">{gigTitle}</span>
             <span>See all bids for this gig to hire the best bidder</span>
           </DialogDescription>
-          {gigStatus === 'assigned' && (
-            <Badge>{hiredBid && <span>Hired: {hiredBid.freelancerId.name}</span>}</Badge>
+          {gigStatus === 'assigned' && hiredBid && (
+            <Badge>Hired: {hiredBid.freelancerId.name}</Badge>
           )}
         </DialogHeader>
         <div className="flex-1">

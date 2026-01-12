@@ -71,6 +71,7 @@ const GigItem = ({
         gigTitle={gig.title}
         gigId={gig._id}
         onBid={onBid}
+        budget={gig.budget}
       />
       <AllBidsDialog
         open={showAllBidsDialog}

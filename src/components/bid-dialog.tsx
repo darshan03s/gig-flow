@@ -10,17 +10,20 @@ import {
 import { Button } from './ui/button';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { Input } from './ui/input';
 
 interface BidDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   gigTitle: string;
   gigId: string;
+  budget: number;
   onBid?: () => void;
 }
 
-const BidDialog = ({ open, onOpenChange, gigTitle, gigId, onBid }: BidDialogProps) => {
+const BidDialog = ({ open, onOpenChange, gigTitle, gigId, budget, onBid }: BidDialogProps) => {
   const [message, setMessage] = useState('');
+  const [price, setPrice] = useState(budget);
 
   async function bidForGig() {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -32,7 +35,8 @@ const BidDialog = ({ open, onOpenChange, gigTitle, gigId, onBid }: BidDialogProp
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          message
+          message,
+          price
         })
       });
       if (!res.ok) {
@@ -62,15 +66,28 @@ const BidDialog = ({ open, onOpenChange, gigTitle, gigId, onBid }: BidDialogProp
           <DialogTitle>Bid for this gig</DialogTitle>
           <DialogDescription className="flex flex-col gap-2">
             <p className="line-clamp-1 text-foreground!">Title: {gigTitle}</p>
-            <span>Enter your skills and how you can help.</span>
           </DialogDescription>
         </DialogHeader>
-        <div>
+        <div className="space-y-2">
           <textarea
             className="h-40 w-full resize-none rounded-md border border-border p-2"
+            placeholder="Tell the client about your skills and how you can help."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
+          <label htmlFor="price" className="text-sm text-muted-foreground">
+            Price
+          </label>
+          <Input
+            id="price"
+            className="w-full"
+            type="number"
+            placeholder="Enter your bid amount"
+            max={budget}
+            min={10}
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
+          />
         </div>
         <DialogFooter>
           <DialogClose asChild>

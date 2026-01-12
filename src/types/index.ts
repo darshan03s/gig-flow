@@ -30,5 +30,6 @@ export interface Bid {
     name: string;
   };
   message: string;
+  price: number;
   status: BidStatus;
 }

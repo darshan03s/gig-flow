@@ -1,5 +1,12 @@
 import type { Bid, GigStatus } from '@/types';
-import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from '@/components/ui/item';
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemTitle
+} from '@/components/ui/item';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { toast } from 'sonner';
@@ -64,6 +71,9 @@ const BidItem = ({
           <Badge>{bid.status}</Badge>
         </ItemActions>
       )}
+      <ItemFooter>
+        <Badge>Price: ${bid.price}</Badge>
+      </ItemFooter>
     </Item>
   );
 };
