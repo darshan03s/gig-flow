@@ -16,7 +16,7 @@ interface BidDialogProps {
   onOpenChange: (open: boolean) => void;
   gigTitle: string;
   gigId: string;
-  onBid: () => void;
+  onBid?: () => void;
 }
 
 const BidDialog = ({ open, onOpenChange, gigTitle, gigId, onBid }: BidDialogProps) => {
@@ -42,7 +42,7 @@ const BidDialog = ({ open, onOpenChange, gigTitle, gigId, onBid }: BidDialogProp
 
       if (res.status === 201) {
         toast.success('Bid submitted successfully');
-        onBid();
+        onBid?.();
         onOpenChange(false);
       }
     } catch (error) {

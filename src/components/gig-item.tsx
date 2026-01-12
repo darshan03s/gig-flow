@@ -6,7 +6,7 @@ import {
   ItemFooter,
   ItemTitle
 } from '@/components/ui/item';
-import type { Bid, Gig } from '@/types';
+import type { Gig } from '@/types';
 import { Button } from './ui/button';
 import { useState } from 'react';
 import BidDialog from './bid-dialog';
@@ -25,7 +25,7 @@ const GigItem = ({
   allowBid?: boolean;
   showAllBids?: boolean;
   applied?: boolean;
-  onBid: () => void;
+  onBid?: () => void;
 }) => {
   const [showBidDialog, setShowBidDialog] = useState(false);
   const [showAllBidsDialog, setShowAllBidsDialog] = useState(false);
