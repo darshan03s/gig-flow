@@ -7,17 +7,27 @@ import {
 } from '@/components/ui/dialog';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import type { Bid } from '@/types';
+import type { Bid, GigStatus } from '@/types';
 import BidItem from './bid-item';
+import { Badge } from './ui/badge';
 
 interface AllBidsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   gigTitle: string;
   gigId: string;
+  onHire?: () => void;
+  gigStatus?: GigStatus;
 }
 
-const AllBidsDialog = ({ open, onOpenChange, gigTitle, gigId }: AllBidsDialogProps) => {
+const AllBidsDialog = ({
+  open,
+  onOpenChange,
+  gigTitle,
+  gigId,
+  onHire,
+  gigStatus
+}: AllBidsDialogProps) => {
   const [bids, setBids] = useState<Bid[]>([]);
 
   useEffect(() => {
@@ -43,19 +53,24 @@ const AllBidsDialog = ({ open, onOpenChange, gigTitle, gigId }: AllBidsDialogPro
     fetchBids();
   }, [open]);
 
+  const hiredBid = bids.find((bid) => bid.status === 'hired');
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="h-140 flex flex-col">
         <DialogHeader>
           <DialogTitle>All bids for this gig</DialogTitle>
           <DialogDescription className="flex flex-col gap-2">
-            <p className="line-clamp-1">{gigTitle}</p>
+            <span className="line-clamp-1">{gigTitle}</span>
             <span>See all bids for this gig to hire the best bidder</span>
           </DialogDescription>
+          {gigStatus === 'assigned' && (
+            <Badge>{hiredBid && <span>Hired: {hiredBid.freelancerId.name}</span>}</Badge>
+          )}
         </DialogHeader>
         <div className="flex-1">
           {bids.map((bid) => (
-            <BidItem key={bid._id} bid={bid} />
+            <BidItem key={bid._id} bid={bid} onHire={onHire} gigStatus={gigStatus} />
           ))}
         </div>
       </DialogContent>

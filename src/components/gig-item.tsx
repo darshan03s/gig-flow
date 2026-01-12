@@ -11,6 +11,7 @@ import { Button } from './ui/button';
 import { useState } from 'react';
 import BidDialog from './bid-dialog';
 import AllBidsDialog from './all-bids-dialog';
+import { Badge } from './ui/badge';
 
 const GigItem = ({
   gig,
@@ -18,7 +19,9 @@ const GigItem = ({
   allowBid = true,
   showAllBids = false,
   applied = false,
-  onBid
+  onBid,
+  onHire,
+  showCreatedBy = true
 }: {
   gig: Gig;
   showBid?: boolean;
@@ -26,6 +29,8 @@ const GigItem = ({
   showAllBids?: boolean;
   applied?: boolean;
   onBid?: () => void;
+  onHire?: () => void;
+  showCreatedBy?: boolean;
 }) => {
   const [showBidDialog, setShowBidDialog] = useState(false);
   const [showAllBidsDialog, setShowAllBidsDialog] = useState(false);
@@ -43,7 +48,7 @@ const GigItem = ({
       <ItemContent>
         <ItemTitle>{gig.title}</ItemTitle>
         <ItemDescription>{gig.description}</ItemDescription>
-        <ItemDescription>Created By: {gig.ownerName}</ItemDescription>
+        {showCreatedBy && <ItemDescription>Created By: {gig.ownerName}</ItemDescription>}
       </ItemContent>
       <ItemActions title={allowBid ? 'Bid' : 'You cannot bid on your own gig'}>
         {showBid && (
@@ -55,9 +60,9 @@ const GigItem = ({
       </ItemActions>
       <ItemFooter>
         <div className="flex items-center gap-4">
-          <span>Budget: ${gig.budget}</span>
-          <span>Status: {gig.status}</span>
-          <span>Bids: {gig.bidCount}</span>
+          <Badge>${gig.budget}</Badge>
+          <Badge>{gig.status}</Badge>
+          <Badge>Bids: {gig.bidCount}</Badge>
         </div>
       </ItemFooter>
       <BidDialog
@@ -72,6 +77,8 @@ const GigItem = ({
         onOpenChange={setShowAllBidsDialog}
         gigTitle={gig.title}
         gigId={gig._id}
+        onHire={onHire}
+        gigStatus={gig.status}
       />
     </Item>
   );

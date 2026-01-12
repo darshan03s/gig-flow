@@ -5,12 +5,15 @@ export interface User {
   createdAt: string;
 }
 
+export type GigStatus = 'open' | 'assigned';
+export type BidStatus = 'pending' | 'hired' | 'rejected';
+
 export interface Gig {
   _id: string;
   title: string;
   description: string;
   budget: number;
-  status: string;
+  status: GigStatus;
   ownerId: string;
   ownerName: string;
   bidCount: number;
@@ -27,5 +30,5 @@ export interface Bid {
     name: string;
   };
   message: string;
-  status: string;
+  status: BidStatus;
 }

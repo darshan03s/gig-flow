@@ -5,27 +5,31 @@ import { useEffect, useState } from 'react';
 const MyGigs = () => {
   const [gigs, setGigs] = useState<Gig[]>([]);
 
+  const fetchMyGigs = async (): Promise<void> => {
+    try {
+      const API_URL = import.meta.env.VITE_API_URL as string;
+      const response = await fetch(`${API_URL}/api/gigs?me=true&status=all`, {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data: { gigs: Gig[] } = await response.json();
+      setGigs(data.gigs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchGigs = async (): Promise<void> => {
-      try {
-        const API_URL = import.meta.env.VITE_API_URL as string;
-        const response = await fetch(`${API_URL}/api/gigs?me=true`, {
-          credentials: 'include',
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        const data: { gigs: Gig[] } = await response.json();
-        setGigs(data.gigs);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchGigs();
+    fetchMyGigs();
   }, []);
+
+  const onHire = () => {
+    fetchMyGigs();
+  };
 
   return (
     <main>
@@ -33,7 +37,14 @@ const MyGigs = () => {
         <h1 className="text-2xl font-bold mb-4">My gigs</h1>
         <div className="space-y-4">
           {gigs.map((gig) => (
-            <GigItem key={gig._id} gig={gig} showBid={false} showAllBids={true} />
+            <GigItem
+              key={gig._id}
+              gig={gig}
+              showBid={false}
+              showAllBids={true}
+              onHire={onHire}
+              showCreatedBy={false}
+            />
           ))}
         </div>
       </div>
