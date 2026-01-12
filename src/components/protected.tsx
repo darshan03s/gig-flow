@@ -2,6 +2,7 @@ import { useUser } from '@/contexts/user/useUser';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { socket } from '@/lib/socket';
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -34,6 +35,8 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
       };
 
       setUser(user);
+      socket.connect();
+      socket.emit('register', user.id);
     } catch (error) {
       console.log(error);
     } finally {

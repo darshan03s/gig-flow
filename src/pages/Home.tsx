@@ -85,7 +85,7 @@ const Home = () => {
         </div>
         <h1 className="text-2xl font-bold">All gigs</h1>
         <div className="space-y-4">
-          {gigs.map((gig) => (
+          {gigs.map((gig: Gig) => (
             <GigItem
               key={gig._id}
               gig={gig}

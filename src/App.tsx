@@ -8,8 +8,29 @@ import Login from './pages/Login';
 import Protected from './components/protected';
 import Register from './pages/Register';
 import CreateGig from './pages/CreateGig';
+import { useEffect } from 'react';
+import { socket } from '@/lib/socket';
+import { toast } from 'sonner';
+import { X } from 'lucide-react';
 
 const App = () => {
+  useEffect(() => {
+    socket.on('hired', ({ gigTitle }) => {
+      toast.success(`You were hired for ${gigTitle}`, {
+        duration: Infinity,
+        action: (
+          <button onClick={() => toast.dismiss()} className="absolute right-2 top-2">
+            <X className="size-4" />
+          </button>
+        )
+      });
+    });
+
+    return () => {
+      socket.off('hired');
+    };
+  }, []);
+
   return (
     <>
       <Header />
