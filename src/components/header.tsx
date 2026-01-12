@@ -69,7 +69,10 @@ const Header = () => {
                 My Bids
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer hover:bg-red-200!" onClick={logout}>
+            <DropdownMenuItem
+              className="cursor-pointer hover:bg-red-500! hover:text-white!"
+              onClick={logout}
+            >
               Logout
             </DropdownMenuItem>
           </DropdownMenuContent>

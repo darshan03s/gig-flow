@@ -61,8 +61,8 @@ const BidDialog = ({ open, onOpenChange, gigTitle, gigId, onBid }: BidDialogProp
         <DialogHeader>
           <DialogTitle>Bid for this gig</DialogTitle>
           <DialogDescription className="flex flex-col gap-2">
-            <p className="line-clamp-1">{gigTitle}</p>
-            <span>Enter your skills and how you can help with this gig.</span>
+            <p className="line-clamp-1 text-foreground!">Title: {gigTitle}</p>
+            <span>Enter your skills and how you can help.</span>
           </DialogDescription>
         </DialogHeader>
         <div>
