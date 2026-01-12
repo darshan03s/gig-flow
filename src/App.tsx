@@ -1,11 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from './components/header';
-import Gigs from './pages/Gigs';
+import MyGigs from './pages/MyGigs';
+import MyBids from './pages/MyBids';
 import { Toaster } from './components/ui/sonner';
 import Login from './pages/Login';
 import Protected from './components/protected';
 import Register from './pages/Register';
+import CreateGig from './pages/CreateGig';
 
 const App = () => {
   return (
@@ -21,10 +23,26 @@ const App = () => {
           }
         />
         <Route
-          path="/gigs"
+          path="/my-gigs"
           element={
             <Protected>
-              <Gigs />
+              <MyGigs />
+            </Protected>
+          }
+        />
+        <Route
+          path="/create-gig"
+          element={
+            <Protected>
+              <CreateGig />
+            </Protected>
+          }
+        />
+        <Route
+          path="/my-bids"
+          element={
+            <Protected>
+              <MyBids />
             </Protected>
           }
         />

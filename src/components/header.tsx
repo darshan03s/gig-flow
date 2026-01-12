@@ -54,7 +54,22 @@ const Header = () => {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer" onClick={logout}>
+            <DropdownMenuItem className="cursor-pointer">
+              <Link className="w-full" to={'/my-gigs'}>
+                My Gigs
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <Link className="w-full" to={'/create-gig'}>
+                Create Gig
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <Link className="w-full" to={'/my-bids'}>
+                My Bids
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer hover:bg-red-200!" onClick={logout}>
               Logout
             </DropdownMenuItem>
           </DropdownMenuContent>
