@@ -33,7 +33,6 @@ const Register = () => {
         navigate('/login');
       }
     } catch (error) {
-      toast.error('Unexpected error');
       console.log(error);
     }
   }

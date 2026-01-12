@@ -35,7 +35,6 @@ const Login = () => {
         navigate('/');
       }
     } catch (error) {
-      toast.error('Unexpected error');
       console.log(error);
     }
   }

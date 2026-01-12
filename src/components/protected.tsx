@@ -35,7 +35,6 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
 
       setUser(user);
     } catch (error) {
-      toast.error('Unexpected error');
       console.log(error);
     } finally {
       setFetchingUser(false);
