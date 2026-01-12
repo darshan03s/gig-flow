@@ -1,9 +1,11 @@
 import GigItem from '@/components/gig-item';
+import { useUser } from '@/contexts/user/useUser';
 import type { Gig } from '@/types';
 import { useEffect, useState } from 'react';
 
 const Home = () => {
   const [gigs, setGigs] = useState<Gig[]>([]);
+  const { user } = useUser();
 
   useEffect(() => {
     const fetchGigs = async (): Promise<void> => {
@@ -33,7 +35,7 @@ const Home = () => {
         <h1 className="text-2xl font-bold mb-4">All gigs</h1>
         <div className="space-y-4">
           {gigs.map((gig) => (
-            <GigItem key={gig._id} gig={gig} />
+            <GigItem key={gig._id} gig={gig} allowBid={user?.id !== gig.ownerId} />
           ))}
         </div>
       </div>

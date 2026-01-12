@@ -12,5 +12,6 @@ export interface Gig {
   budget: number;
   status: string;
   ownerId: string;
+  ownerName: string;
   bidCount: number;
 }
