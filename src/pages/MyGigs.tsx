@@ -33,7 +33,7 @@ const MyGigs = () => {
         <h1 className="text-2xl font-bold mb-4">My gigs</h1>
         <div className="space-y-4">
           {gigs.map((gig) => (
-            <GigItem key={gig._id} gig={gig} showBid={false} />
+            <GigItem key={gig._id} gig={gig} showBid={false} showAllBids={true} />
           ))}
         </div>
       </div>

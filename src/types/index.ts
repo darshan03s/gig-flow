@@ -15,3 +15,17 @@ export interface Gig {
   ownerName: string;
   bidCount: number;
 }
+
+export interface Bid {
+  _id: string;
+  gigId: {
+    _id: string;
+    title: string;
+  };
+  freelancerId: {
+    _id: string;
+    name: string;
+  };
+  message: string;
+  status: string;
+}
