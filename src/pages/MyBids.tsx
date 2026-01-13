@@ -29,7 +29,7 @@ const MyBids = () => {
 
   return (
     <main>
-      <div className="max-w-3xl mx-auto py-4">
+      <div className="sm:max-w-2xl md:max-w-3xl mx-auto py-4">
         <h1 className="text-2xl font-bold mb-4">My bids</h1>
         <div className="space-y-4">
           {bids.map((bid) => (

@@ -72,7 +72,7 @@ const Home = () => {
 
   return (
     <main>
-      <div className="max-w-3xl mx-auto py-4 space-y-4">
+      <div className="sm:max-w-2xl md:max-w-3xl mx-auto py-4 space-y-4">
         <div>
           <form onSubmit={handleSearch}>
             <Input
